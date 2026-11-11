@@ -1,84 +1,153 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Browser Navigation Keys</title>
+  <title>Hotstar Shortcut</title>
 
   <link rel="stylesheet" href="popup.css">
 </head>
 
 <body>
 
-  <div class="container">
+  <main class="app">
 
-    <header>
-      <div class="logo">↔</div>
+    <!-- Header -->
+    <header class="header">
 
-      <div>
-        <h2>Browser Navigation</h2>
-        <p>Keyboard Navigation Toolkit</p>
+      <img
+        src="icons/icon48.png"
+        class="logo"
+        alt="Hotstar Shortcut"
+      >
+
+      <div class="brand">
+        <h1>Hotstar Shortcut</h1>
+        <p>Quick Navigation for JioHotstar</p>
       </div>
+
+      <span class="version">v4.1</span>
+
     </header>
 
-    <section class="control-card">
+    <!-- Extension Status -->
+    <section class="status-card" id="statusCard">
 
-      <div>
-        <h3>Navigation</h3>
-        <p id="statusText">Loading...</p>
+      <div class="status-icon" id="statusIcon">
+        ✓
+      </div>
+
+      <div class="status-info">
+        <h2 id="statusHeading">
+          Extension Enabled
+        </h2>
+
+        <p id="statusDescription">
+          Keyboard shortcuts are active
+        </p>
       </div>
 
       <label class="switch">
-        <input type="checkbox" id="enableToggle">
-        <span class="slider"></span>
+        <input
+          type="checkbox"
+          id="enableToggle"
+        >
+
+        <span class="switch-slider"></span>
       </label>
 
     </section>
 
-    <section class="settings">
+    <!-- Website Access -->
+    <section class="section">
 
-      <h3>Website Access</h3>
+      <div class="section-heading">
+        <span class="section-icon">◎</span>
+        <h3>Website Access</h3>
+      </div>
 
-      <select id="scopeSelect">
-        <option value="hotstar">JioHotstar Only</option>
-        <option value="all">All Websites</option>
-      </select>
+      <div class="scope-options">
 
-      <p id="scopeDescription">
-        Navigation works only on JioHotstar.
+        <button
+          class="scope-button"
+          data-scope="hotstar"
+          type="button"
+        >
+          <span class="scope-symbol">✦</span>
+          <span>JioHotstar Only</span>
+        </button>
+
+        <button
+          class="scope-button"
+          data-scope="all"
+          type="button"
+        >
+          <span class="scope-symbol">◎</span>
+          <span>All Websites</span>
+        </button>
+
+      </div>
+
+      <p class="helper" id="scopeDescription">
+        Shortcuts work only on JioHotstar.
       </p>
 
     </section>
 
-    <section class="shortcuts">
+    <!-- Keyboard Shortcuts -->
+    <section class="section shortcut-section">
 
-      <h3>Keyboard Shortcuts</h3>
+      <div class="section-heading">
+        <span class="section-icon">⌨</span>
+        <h3>Keyboard Shortcuts</h3>
+      </div>
 
-      <div class="shortcut">
-  <span>Browser Forward</span>
-  <kbd>ALT + U</kbd>
-</div>
+      <div class="shortcut-row">
+        <span class="shortcut-symbol">→</span>
+        <span class="shortcut-name">Browser Forward</span>
+        <kbd>ALT + U</kbd>
+      </div>
 
-<div class="shortcut">
-  <span>Browser Back</span>
-  <kbd>ALT + Y</kbd>
-</div>
+      <div class="shortcut-row">
+        <span class="shortcut-symbol">←</span>
+        <span class="shortcut-name">Browser Back</span>
+        <kbd>ALT + Y</kbd>
+      </div>
 
-      <div class="shortcut">
-        <span>Enable / Disable</span>
+      <div class="shortcut-row">
+        <span class="shortcut-symbol">⏻</span>
+        <span class="shortcut-name">Enable / Disable</span>
         <kbd>ALT + Q</kbd>
       </div>
 
     </section>
 
-    <footer>
-      <span id="footerStatus">Ready</span>
-      <span>Version 3.0</span>
+    <!-- Footer -->
+    <footer class="footer">
+
+      <div class="developer">
+        <span class="developer-icon">&lt;/&gt;</span>
+
+        <span>
+          Developed by
+          <strong>Rajendra Das</strong>
+        </span>
+      </div>
+
+      <button
+        id="shortcutsLink"
+        type="button"
+        title="Configure keyboard shortcuts"
+      >
+        ↗
+      </button>
+
     </footer>
 
-  </div>
+  </main>
 
   <script src="popup.js"></script>
 

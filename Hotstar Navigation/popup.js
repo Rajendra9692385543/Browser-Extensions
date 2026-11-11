@@ -1,70 +1,119 @@
 
 const enableToggle = document.getElementById("enableToggle");
-const scopeSelect = document.getElementById("scopeSelect");
-const statusText = document.getElementById("statusText");
-const scopeDescription = document.getElementById("scopeDescription");
-const footerStatus = document.getElementById("footerStatus");
 
+const statusCard = document.getElementById("statusCard");
+const statusIcon = document.getElementById("statusIcon");
+const statusHeading = document.getElementById("statusHeading");
+const statusDescription = document.getElementById("statusDescription");
+
+const scopeDescription = document.getElementById("scopeDescription");
+const scopeButtons = document.querySelectorAll(".scope-button");
+
+let settings = {
+  enabled: true,
+  scope: "hotstar"
+};
+
+// Load saved settings
 async function loadSettings() {
-  const settings = await chrome.storage.local.get({
+  settings = await chrome.storage.local.get({
     enabled: true,
     scope: "hotstar"
   });
 
-  enableToggle.checked = settings.enabled;
-  scopeSelect.value = settings.scope;
-
-  updateInterface(settings);
+  render();
 }
 
-function updateInterface(settings) {
-  statusText.textContent = settings.enabled
-    ? "Navigation is enabled"
-    : "Navigation is disabled";
+// Update popup interface
+function render() {
+  enableToggle.checked = settings.enabled;
 
-  statusText.style.color = settings.enabled
-    ? "#4ade80"
-    : "#f87171";
+  statusCard.classList.toggle(
+    "disabled",
+    !settings.enabled
+  );
+
+  statusIcon.textContent = settings.enabled ? "✓" : "−";
+
+  statusHeading.textContent = settings.enabled
+    ? "Extension Enabled"
+    : "Extension Disabled";
+
+  statusDescription.textContent = settings.enabled
+    ? "Keyboard shortcuts are active"
+    : "Keyboard shortcuts are paused";
 
   scopeDescription.textContent =
     settings.scope === "hotstar"
-      ? "Works only on JioHotstar."
-      : "Works on all websites.";
+      ? "Shortcuts work only on JioHotstar."
+      : "Shortcuts work on all websites.";
 
-  footerStatus.textContent = settings.enabled
-    ? "System Active"
-    : "System Inactive";
+  scopeButtons.forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.scope === settings.scope
+    );
+  });
 }
 
-// Enable / Disable navigation
+// Show notification on current webpage
+async function notifyCurrentPage(enabled) {
+  try {
+    await chrome.runtime.sendMessage({
+      type: "NOTIFY_ACTIVE_TAB",
+
+      status: enabled ? "success" : "disabled",
+
+      message: enabled
+        ? "Extension enabled successfully"
+        : "Extension disabled"
+    });
+  } catch (error) {
+    console.error("Notification failed:", error);
+  }
+}
+
+// Enable / Disable toggle
 enableToggle.addEventListener("change", async () => {
-  const enabled = enableToggle.checked;
+  settings.enabled = enableToggle.checked;
 
-  await chrome.storage.local.set({ enabled });
+  await chrome.storage.local.set({
+    enabled: settings.enabled
+  });
 
-  updateInterface({
-    enabled,
-    scope: scopeSelect.value
+  render();
+
+  await notifyCurrentPage(settings.enabled);
+});
+
+// Website scope selection
+scopeButtons.forEach(button => {
+  button.addEventListener("click", async () => {
+    settings.scope = button.dataset.scope;
+
+    await chrome.storage.local.set({
+      scope: settings.scope
+    });
+
+    render();
   });
 });
 
-// Change website scope
-scopeSelect.addEventListener("change", async () => {
-  const scope = scopeSelect.value;
-
-  await chrome.storage.local.set({ scope });
-
-  updateInterface({
-    enabled: enableToggle.checked,
-    scope
+// Open Chrome keyboard shortcut settings
+document
+  .getElementById("shortcutsLink")
+  .addEventListener("click", () => {
+    chrome.tabs.create({
+      url: "chrome://extensions/shortcuts"
+    });
   });
-});
 
-// Keep popup synchronized with keyboard toggle
+// Synchronize popup if keyboard shortcut changes settings
 chrome.storage.onChanged.addListener((changes) => {
   if (changes.enabled || changes.scope) {
     loadSettings();
   }
 });
 
+// Initialize
 loadSettings();
