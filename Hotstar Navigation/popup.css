@@ -1,0 +1,159 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  width: 330px;
+  background: #111827;
+  color: #f9fafb;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  padding: 18px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.logo {
+  width: 43px;
+  height: 43px;
+  border-radius: 12px;
+  background: #2563eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 27px;
+}
+
+h2 {
+  font-size: 16px;
+  margin: 0;
+}
+
+header p {
+  font-size: 11px;
+  color: #9ca3af;
+  margin: 5px 0 0;
+}
+
+.control-card {
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h3 {
+  font-size: 13px;
+  margin: 0 0 8px;
+}
+
+.control-card p {
+  font-size: 11px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 43px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: #4b5563;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+input:checked + .slider {
+  background: #16a34a;
+}
+
+input:checked + .slider:before {
+  transform: translateX(19px);
+}
+
+.settings {
+  margin-top: 22px;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 7px;
+  border: 1px solid #374151;
+  background: #1f2937;
+  color: white;
+  outline: none;
+}
+
+.settings p {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 8px;
+}
+
+.shortcuts {
+  margin-top: 22px;
+}
+
+.shortcut {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #374151;
+  font-size: 12px;
+}
+
+kbd {
+  background: #374151;
+  border-radius: 5px;
+  padding: 5px 7px;
+  color: #d1d5db;
+  font-size: 10px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  color: #9ca3af;
+  font-size: 10px;
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 1px solid #374151;
+}

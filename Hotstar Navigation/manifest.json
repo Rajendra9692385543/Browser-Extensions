@@ -2,8 +2,8 @@
 {
   "manifest_version": 3,
   "name": "Browser Navigation Keys",
-  "version": "2.0",
-  "description": "Control browser Back and Forward using simple keyboard shortcuts",
+  "version": "3.0",
+  "description": "Navigate browser history using simple keyboard shortcuts.",
   "permissions": [
     "tabs",
     "storage"
@@ -11,24 +11,28 @@
   "background": {
     "service_worker": "background.js"
   },
+  "action": {
+    "default_title": "Browser Navigation Keys",
+    "default_popup": "popup.html"
+  },
   "commands": {
-    "go-back": {
-      "suggested_key": {
-        "default": "Alt+U"
-      },
-      "description": "Navigate Back"
+  "go-back": {
+    "suggested_key": {
+      "default": "Alt+Y"
     },
-    "go-forward": {
-      "suggested_key": {
-        "default": "Alt+Y"
-      },
-      "description": "Navigate Forward"
+    "description": "Navigate Back"
+  },
+  "go-forward": {
+    "suggested_key": {
+      "default": "Alt+U"
     },
-    "toggle-navigation": {
-      "suggested_key": {
-        "default": "Alt+E"
-      },
-      "description": "Enable or Disable Navigation"
-    }
+    "description": "Navigate Forward"
+  },
+  "toggle-navigation": {
+    "suggested_key": {
+      "default": "Alt+Q"
+    },
+    "description": "Enable or Disable Navigation"
   }
+}
 }
