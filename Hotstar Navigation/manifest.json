@@ -1,0 +1,26 @@
+
+{
+  "manifest_version": 3,
+  "name": "Hotstar Navigation Keys",
+  "version": "1.0",
+  "description": "Control browser navigation using B and N",
+  "permissions": ["tabs"],
+  "host_permissions": [
+    "https://*.jiohotstar.com/*",
+    "https://*.hotstar.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.jiohotstar.com/*",
+        "https://*.hotstar.com/*"
+      ],
+      "js": ["content.js"],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ]
+}
